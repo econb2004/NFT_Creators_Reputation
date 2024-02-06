@@ -1,0 +1,52 @@
+Assign Weights: Assign weights to each factor in the CRI formula. These weights can be derived from feature importances as discussed earlier or determined based on domain expertise and stakeholder input.
+
+Retrieve Feature Values: For the specific NFT you're interested in, gather the values of the factors involved in the CRI formula. These include Creator Reputation (CR), Scarcity, Utility, Provenance, Community Engagement, Technological Innovation, AI Factors, Accounting Factors, and Legal Factors.
+
+Apply Weights: Multiply each factor value by its corresponding weight.
+
+Calculate the Weighted Sum: Sum up the products obtained from the previous step.
+
+Divide by Total Weights: Divide the weighted sum by the total sum of weights.
+
+
+
+
+# Replace these values with the actual weights and feature values for your NFT
+weights = {
+    'CR': 0.1,
+    'Scarcity': 0.15,
+    'Utility': 0.1,
+    'Provenance': 0.1,
+    'Community': 0.1,
+    'Tech': 0.1,
+    'AI': 0.1,
+    'Accounting': 0.1,
+    'Legal': 0.1
+}
+
+# Replace these values with the actual feature values for your NFT
+feature_values = {
+    'CR': 80,
+    'Scarcity': 0.8,
+    'Utility': 1,
+    'Provenance': 'Verified',
+    'Community': 'High',
+    'Tech': 'Yes',
+    'AI': 'High',
+    'Accounting': 'Standard',
+    'Legal': 'Compliant'
+}
+
+# Calculate the weighted sum
+weighted_sum = sum(weights[feature] * feature_values[feature] for feature in weights)
+
+# Calculate the Creator Reputation Index (CRI)
+total_weights = sum(weights.values())
+cri = weighted_sum / total_weights
+
+# Display the calculated CRI
+print(f"Creator Reputation Index (CRI) for the NFT: {cri}")
+
+
+This code provides a template for calculating CRI based on assigned weights and specific feature values for a particular NFT. Adjust the weights and feature values according to your specific scenario.
+
