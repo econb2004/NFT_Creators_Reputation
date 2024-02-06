@@ -1,0 +1,36 @@
+***** RETRIEVE AND SAVE FEATURE WEIGHTS *****
+
+# Train a Random Forest model
+rf_model = RandomForestRegressor(random_state=42)
+rf_model.fit(X, y)
+
+# Extract feature importances
+feature_importances = rf_model.feature_importances_
+
+# Create a DataFrame to display feature importances
+feature_importance_df = pd.DataFrame({'Feature': X.columns, 'Importance': feature_importances})
+feature_importance_df.sort_values(by='Importance', ascending=False, inplace=True)
+
+# Save feature importances to a CSV file
+feature_importance_df.to_csv('feature_importances.csv', index=False)
+
+# Display the feature importances
+print(feature_importance_df)
+
+
+***** TO FIND THE CREATORS REPUTATION INDEX: *******
+
+# Retrieve the features used in the Random Forest model
+selected_features = X.columns
+
+# Extract the weights from the feature importances DataFrame
+weights = feature_importance_df.set_index('Feature').loc[selected_features, 'Importance'].values
+
+# Normalize the weights to ensure they sum up to 1
+weights_normalized = weights / weights.sum()
+
+# Apply the weights to the corresponding features in the dataset
+df['Weighted_Creator_Reputation'] = (df[selected_features] * weights_normalized).sum(axis=1)
+
+# Display the DataFrame with the calculated Weighted_Creator_Reputation
+print(df[['CR', 'Weighted_Creator_Reputation']])
